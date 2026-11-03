@@ -1,0 +1,25 @@
+name: construccion y carga de imagen
+on:
+  push:
+    branch: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: traer mi codigo
+        uses: actions/checkout@v4
+      
+      - name: login en dockerhub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: construccion y publicacion de imagen
+        uses: docker/build-push-action@v5
+        with: 
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/suscripciones:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}//suscripciones:${{ github.run_number }}
