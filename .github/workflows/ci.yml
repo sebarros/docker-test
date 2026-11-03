@@ -22,4 +22,4 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/suscripciones:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}//suscripciones:${{ github.run_number }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/suscripciones:${{ github.run_number }}
